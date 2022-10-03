@@ -73,12 +73,8 @@ mkdir practice-rebase && cd "$_" && git init
 총 11개의 커밋을 생성한다.
 
 ```sh
-for i in {1..11}
-do
-  echo "Hello $i" >> "${i}.txt"
-  git add -A
-  git commit -m "${i} little"
-done
+# for i in `seq $1 $2`; do git commit --allow-empty -m "${i} little"; done
+./dummy-commit.sh 1 11
 ```
 
 마지막으로 아래 명령어를 실행해서 11개인지 확인한다.
@@ -414,9 +410,7 @@ mkdir practice-rebase && cd "$_" && git init
 공통 조상을 만든다.
 
 ```sh
-echo "Hello 1" > "1.txt"
-git add -A
-git commit -m "1 little"
+./dummy-commit.sh 1
 ```
 
 develop 브랜치를 생성한다.
@@ -428,12 +422,7 @@ git switch -c develop
 ```sh
 # master와 develop 브랜치는 서로 다른 내용을 갖고 있게 만든다.
 # 여기서 학습할 건 충돌 해결이 아니다.
-for i in {2..3}
-do
-  echo "Hello $i" > "${i}.txt"
-  git add -A
-  git commit -m "${i} little"
-done
+./dummy-commit.sh 2 3
 ```
 
 master 브랜치로 돌아가서 다른 2개의 파일을 커밋한다.
@@ -443,12 +432,7 @@ git switch -
 ```
 
 ```sh
-for i in {4..5}
-do
-  echo "Hello $i" > "${i}.txt"
-  git add -A
-  git commit -m "${i} little"
-done
+./dummy-commit.sh 4 5
 ```
 
 브랜치를 확인해보자.
