@@ -2,7 +2,6 @@
 
 - [subtree](#subtree)
   - [개념](#개념)
-    - [subtree?](#subtree-1)
   - [실습](#실습)
     - [subtree 추가](#subtree-추가)
     - [subtree 추가 시 고려 사항](#subtree-추가-시-고려-사항)
@@ -18,8 +17,6 @@
 
 하나의 저장소를 다른 저장소의 하위 디렉토리로 가져올 수 있다.
 
-### subtree?
-
 ![Subtree](images/tree-subtree-concept.png)
 
 [이미지 출처](https://opensource.com/article/20/5/git-submodules-subtrees)
@@ -27,10 +24,9 @@
 ## 실습
 
 실습을 위해 2개의 repository가 필요하다.
-명칭은 아무 상관없다.
 
-- xpdojo/git-subtree-a
-- xpdojo/git-subtree-b
+- project/git-subtree-a
+- project/git-subtree-b
 
 ### subtree 추가
 
@@ -38,7 +34,7 @@
 우선 첫번째 repository를 생성하고 clone한다.
 
 ```sh
-git clone git@github.com:xpdojo/git-subtree-a.git
+git clone git@github.com:project/git-subtree-a.git
 ```
 
 ```sh
@@ -49,7 +45,7 @@ subtree로 사용할 `remote`를 추가해야 한다.
 
 ```sh
 # git remote add <remote_name> <remote_url>
-git remote add git-subtree-b git@github.com:xpdojo/git-subtree-b.git
+git remote add git-subtree-b git@github.com:project/git-subtree-b.git
 ```
 
 ```sh
@@ -57,10 +53,10 @@ git remote -v
 ```
 
 ```sh
-git-subtree-b   git@github.com:xpdojo/git-subtree-b.git (fetch)
-git-subtree-b   git@github.com:xpdojo/git-subtree-b.git (push)
-origin  git@github.com:xpdojo/git-subtree-a.git (fetch)
-origin  git@github.com:xpdojo/git-subtree-a.git (push)
+git-subtree-b   git@github.com:project/git-subtree-b.git (fetch)
+git-subtree-b   git@github.com:project/git-subtree-b.git (push)
+origin  git@github.com:project/git-subtree-a.git (fetch)
+origin  git@github.com:project/git-subtree-a.git (push)
 ```
 
 `remote`를 기준으로 `subtree`를 추가한다.
@@ -109,17 +105,20 @@ Date:   Tue Oct 4 04:29:15 2022 +0900
     git-subtree-split: 6fdfd2429f3a8e639f5d49169bdb7475b3e7a57d
 
 commit 6fdfd2429f3a8e639f5d49169bdb7475b3e7a57d (git-subtree-b/main)
-Author: markruler <imcxsu@gmail.com>
+Author: Changsu Im <imcxsu@gmail.com>
 Date:   Tue Oct 4 00:06:22 2022 +0900
 
     Initial commit
 
 commit e526ad13b0db44e458a9b30a6bd6d3c7070e724a (origin/main, origin/HEAD)
-Author: markruler <imcxsu@gmail.com>
+Author: Changsu Im <imcxsu@gmail.com>
 Date:   Tue Oct 4 00:05:00 2022 +0900
 
     Initial commit
 ```
+
+그래서 팀원들과 협업 시 이미 추가된 directory를 subtree로 추가할 필요는 없다.
+remote repository만 추가하고 subtree로 사용하면 된다.
 
 ### subtree 추가 시 고려 사항
 
@@ -311,7 +310,10 @@ done
 ```
 
 정확한 원인은 알 수 없지만 위 push 에러와 같이 recursion 이슈로 보인다.
-`--squash` 옵션을 사용해서 subtree 추가하면 해결된다.
+subtree를 추가할 때 `--squash` 옵션을 사용해서 해결된다.
+
+위 이슈들을 참고해서 기존 커밋 히스토리가 많이 누적된 리포지터리를
+subtree로 추가할 경우 `--squash` 옵션을 사용하는 것이 좋을 것 같다.
 
 ## 참조
 
